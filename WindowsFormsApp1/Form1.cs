@@ -311,6 +311,8 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'pOSDBDataSet.Orders' table. You can move, or remove it, as needed.
+            this.ordersTableAdapter.Fill(this.pOSDBDataSet.Orders);
             // TODO: This line of code loads data into the 'pOSDBDataSet.Customers' table. You can move, or remove it, as needed.
             this.customersTableAdapter.Fill(this.pOSDBDataSet.Customers);
             // TODO: This line of code loads data into the 'pOSDBDataSet1.Products' table. You can move, or remove it, as needed.
@@ -322,6 +324,7 @@ namespace WindowsFormsApp1
         {
             ViewProductsDataGridView.Visible = true;
             ViewCustomersDataGridView.Visible = false;
+            ViewOrdersDataGridView.Visible = false;
         }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -331,9 +334,9 @@ namespace WindowsFormsApp1
 
         private void ViewCustomersBtn_Click(object sender, EventArgs e)
         {
-
             ViewCustomersDataGridView.Visible = true;
             ViewProductsDataGridView.Visible = false;
+            ViewOrdersDataGridView.Visible = false;
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -388,6 +391,10 @@ namespace WindowsFormsApp1
             {
                 AddProductToOrderBtn.Visible = true;
             }
+            else
+            {
+                AddProductToOrderBtn.Visible = false;
+            }
         }
 
 
@@ -397,6 +404,10 @@ namespace WindowsFormsApp1
             {
                 AddProductToOrderBtn.Visible = true;
             }
+            else
+            {
+                AddProductToOrderBtn.Visible = false;
+            }
 
         }
 
@@ -404,11 +415,22 @@ namespace WindowsFormsApp1
         {
             try
             {
-                bool success = OrderDetail.validateOrderProduct(Convert.ToInt16(AddProductIdToOrderTxtBx.Text), Convert.ToInt16(AddProductQuantityToOrderTxtBx.Text));
-                
+                // Validation method not working so continuing without validating and will fix this later.
+                //bool success = OrderDetail.validateOrderProduct(Convert.ToInt16(AddProductIdToOrderTxtBx.Text), Convert.ToInt16(AddProductQuantityToOrderTxtBx.Text));
+                bool success = true;
+
+
                 if(success)
                 {
-                    OrderDetail.AddProductToOrder(Convert.ToInt16(CreateOrderCustomerIdTxtBx.Text), Convert.ToInt16(AddProductIdToOrderTxtBx), Convert.ToInt16(AddProductQuantityToOrderTxtBx));
+                    bool productAdded = OrderDetail.AddProductToOrder(Convert.ToInt32(CreateOrderCustomerIdTxtBx.Text), Convert.ToInt32(AddProductIdToOrderTxtBx.Text), Convert.ToInt32(AddProductQuantityToOrderTxtBx.Text));
+                    if (productAdded)
+                    {
+                        MessageBox.Show("Product added");
+                        AddProductIdToOrderTxtBx.Text = "";
+                        AddProductQuantityToOrderTxtBx.Text = "";
+                        AddCustomerAddBtn.Visible = false;
+                        return;
+                    }
                 }
 
                 else
@@ -419,7 +441,7 @@ namespace WindowsFormsApp1
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error " + ex.InnerException.Message);
             }
 
 
@@ -428,6 +450,13 @@ namespace WindowsFormsApp1
         private void CreateOrderCustomerIdLbl_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            ViewOrdersDataGridView.Visible = true;
+            ViewCustomersDataGridView.Visible = false;
+            ViewProductsDataGridView.Visible = false;
         }
     }
 }

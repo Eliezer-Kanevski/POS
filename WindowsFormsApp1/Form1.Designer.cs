@@ -76,6 +76,16 @@
             this.AddProductIdToOrderTxtBx = new System.Windows.Forms.TextBox();
             this.AddProductQuantityToOrderTxtBx = new System.Windows.Forms.TextBox();
             this.AddProductToOrderBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ViewOrdersDataGridView = new System.Windows.Forms.DataGridView();
+            this.ordersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ordersTableAdapter = new WindowsFormsApp1.POSDBDataSetTableAdapters.OrdersTableAdapter();
+            this.ordersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.ordersBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.OrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDBDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewProductsDataGridView)).BeginInit();
@@ -83,6 +93,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewCustomersDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ViewOrdersDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // AddProductBtn
@@ -537,12 +551,97 @@
             this.AddProductToOrderBtn.Visible = false;
             this.AddProductToOrderBtn.Click += new System.EventHandler(this.AddProductToOrderBtn_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button1.Location = new System.Drawing.Point(736, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 52);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "View Customers";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_3);
+            // 
+            // ViewOrdersDataGridView
+            // 
+            this.ViewOrdersDataGridView.AutoGenerateColumns = false;
+            this.ViewOrdersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ViewOrdersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.OrderID,
+            this.CustomerID,
+            this.OrderDate,
+            this.Status});
+            this.ViewOrdersDataGridView.DataSource = this.ordersBindingSource2;
+            this.ViewOrdersDataGridView.Location = new System.Drawing.Point(282, 337);
+            this.ViewOrdersDataGridView.Name = "ViewOrdersDataGridView";
+            this.ViewOrdersDataGridView.RowHeadersWidth = 4;
+            this.ViewOrdersDataGridView.RowTemplate.Height = 24;
+            this.ViewOrdersDataGridView.Size = new System.Drawing.Size(420, 219);
+            this.ViewOrdersDataGridView.TabIndex = 37;
+            this.ViewOrdersDataGridView.Visible = false;
+            // 
+            // ordersBindingSource
+            // 
+            this.ordersBindingSource.DataMember = "Orders";
+            this.ordersBindingSource.DataSource = this.pOSDBDataSetBindingSource;
+            // 
+            // ordersTableAdapter
+            // 
+            this.ordersTableAdapter.ClearBeforeFill = true;
+            // 
+            // ordersBindingSource1
+            // 
+            this.ordersBindingSource1.DataMember = "Orders";
+            this.ordersBindingSource1.DataSource = this.pOSDBDataSetBindingSource;
+            // 
+            // ordersBindingSource2
+            // 
+            this.ordersBindingSource2.DataMember = "Orders";
+            this.ordersBindingSource2.DataSource = this.pOSDBDataSetBindingSource;
+            // 
+            // OrderID
+            // 
+            this.OrderID.DataPropertyName = "OrderID";
+            this.OrderID.HeaderText = "Order ID";
+            this.OrderID.MinimumWidth = 6;
+            this.OrderID.Name = "OrderID";
+            this.OrderID.ReadOnly = true;
+            this.OrderID.Width = 60;
+            // 
+            // CustomerID
+            // 
+            this.CustomerID.DataPropertyName = "CustomerID";
+            this.CustomerID.HeaderText = "Customer ID";
+            this.CustomerID.MinimumWidth = 6;
+            this.CustomerID.Name = "CustomerID";
+            this.CustomerID.ReadOnly = true;
+            this.CustomerID.Width = 60;
+            // 
+            // OrderDate
+            // 
+            this.OrderDate.DataPropertyName = "OrderDate";
+            this.OrderDate.HeaderText = "Order Date";
+            this.OrderDate.MinimumWidth = 6;
+            this.OrderDate.Name = "OrderDate";
+            this.OrderDate.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Order Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.Width = 60;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1151, 711);
+            this.Controls.Add(this.ViewOrdersDataGridView);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.AddProductToOrderBtn);
             this.Controls.Add(this.AddProductQuantityToOrderTxtBx);
             this.Controls.Add(this.AddProductIdToOrderTxtBx);
@@ -584,6 +683,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewCustomersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ViewOrdersDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -638,6 +741,16 @@
         private System.Windows.Forms.TextBox AddProductIdToOrderTxtBx;
         private System.Windows.Forms.TextBox AddProductQuantityToOrderTxtBx;
         private System.Windows.Forms.Button AddProductToOrderBtn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView ViewOrdersDataGridView;
+        private System.Windows.Forms.BindingSource ordersBindingSource;
+        private POSDBDataSetTableAdapters.OrdersTableAdapter ordersTableAdapter;
+        private System.Windows.Forms.BindingSource ordersBindingSource2;
+        private System.Windows.Forms.BindingSource ordersBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
     }
 }
 

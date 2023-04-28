@@ -12,8 +12,10 @@ namespace WindowsFormsApp1
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Forms;
+    using System.Xml.Linq;
 
     public partial class OrderDetail
     {
@@ -33,11 +35,26 @@ namespace WindowsFormsApp1
                 
                 using (var db = new POSDBDataSet())
                 {
+                    /*
                     var availableQuantity = db.Products
                         .Where(p => p.ProductID == productId)
                         .Select(p => p.Quantity)
                         .SingleOrDefault();
+                    */
+                    var product = db.Products.FirstOrDefault(p => p.ProductID == productId);
 
+                    if(product == null) {
+                        MessageBox.Show("Product not found");
+                        return false;
+                    }
+                    
+                    
+                    bool valid = product.Quantity >= quantity;
+                    MessageBox.Show("available quantity = " + product.Quantity.ToString() + " quantity = " + quantity.ToString());
+                    MessageBox.Show("is quantity valid? " + valid);
+                    return product.Quantity >= quantity;
+
+                    /*
                     if (availableQuantity == null)
                     {
                         MessageBox.Show("Product not found");
@@ -48,6 +65,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("available quantity = " + availableQuantity.ToString() + " quantity = " + quantity.ToString());
                     MessageBox.Show("is quantity valid? " + valid);
                     return availableQuantity >= quantity;
+                    */
                 }
                 
                 
@@ -60,7 +78,35 @@ namespace WindowsFormsApp1
             }
             
         }
-    }
 
-    public static bool AddProductToOrder()
+        public static bool AddProductToOrder(int orderId, int productId, int quantity)
+        {
+            try
+            {
+                using (var db = new POSDBEntities())
+                {
+                    int maxOrderDetailsId = db.OrderDetails.Any() ? db.OrderDetails.Max(o => o.OrderDetailID) : 0;
+                    int orderDetailsID = maxOrderDetailsId + 1;
+                    MessageBox.Show("generated ID = " + orderDetailsID);
+                    var newOrderDetail = new OrderDetail()
+                    {
+                        OrderDetailID = orderDetailsID,
+                        OrderID = orderId,
+                        ProductID = productId,
+                        Quantity = quantity
+                    };
+
+                    db.OrderDetails.Add(newOrderDetail);
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.InnerException.InnerException.Message);
+                return false;
+            }
+        }
+    }  
 }
