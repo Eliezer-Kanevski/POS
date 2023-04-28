@@ -86,6 +86,7 @@
             this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubmitOrderBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDBDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewProductsDataGridView)).BeginInit();
@@ -316,7 +317,7 @@
             this.priceDataGridViewTextBoxColumn,
             this.quantityDataGridViewTextBoxColumn});
             this.ViewProductsDataGridView.DataSource = this.productsBindingSource;
-            this.ViewProductsDataGridView.Location = new System.Drawing.Point(602, 306);
+            this.ViewProductsDataGridView.Location = new System.Drawing.Point(536, 88);
             this.ViewProductsDataGridView.Name = "ViewProductsDataGridView";
             this.ViewProductsDataGridView.RowHeadersWidth = 4;
             this.ViewProductsDataGridView.RowTemplate.Height = 24;
@@ -360,7 +361,7 @@
             this.phoneDataGridViewTextBoxColumn,
             this.addressDataGridViewTextBoxColumn});
             this.ViewCustomersDataGridView.DataSource = this.customersBindingSource;
-            this.ViewCustomersDataGridView.Location = new System.Drawing.Point(548, 334);
+            this.ViewCustomersDataGridView.Location = new System.Drawing.Point(536, 88);
             this.ViewCustomersDataGridView.Name = "ViewCustomersDataGridView";
             this.ViewCustomersDataGridView.RowHeadersWidth = 4;
             this.ViewCustomersDataGridView.RowTemplate.Height = 24;
@@ -558,7 +559,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 52);
             this.button1.TabIndex = 36;
-            this.button1.Text = "View Customers";
+            this.button1.Text = "View Orders";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_3);
             // 
@@ -572,11 +573,11 @@
             this.OrderDate,
             this.Status});
             this.ViewOrdersDataGridView.DataSource = this.ordersBindingSource2;
-            this.ViewOrdersDataGridView.Location = new System.Drawing.Point(282, 337);
+            this.ViewOrdersDataGridView.Location = new System.Drawing.Point(536, 90);
             this.ViewOrdersDataGridView.Name = "ViewOrdersDataGridView";
             this.ViewOrdersDataGridView.RowHeadersWidth = 4;
             this.ViewOrdersDataGridView.RowTemplate.Height = 24;
-            this.ViewOrdersDataGridView.Size = new System.Drawing.Size(420, 219);
+            this.ViewOrdersDataGridView.Size = new System.Drawing.Size(405, 219);
             this.ViewOrdersDataGridView.TabIndex = 37;
             this.ViewOrdersDataGridView.Visible = false;
             // 
@@ -634,12 +635,25 @@
             this.Status.ReadOnly = true;
             this.Status.Width = 60;
             // 
+            // SubmitOrderBtn
+            // 
+            this.SubmitOrderBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.SubmitOrderBtn.Location = new System.Drawing.Point(295, 299);
+            this.SubmitOrderBtn.Name = "SubmitOrderBtn";
+            this.SubmitOrderBtn.Size = new System.Drawing.Size(99, 28);
+            this.SubmitOrderBtn.TabIndex = 38;
+            this.SubmitOrderBtn.Text = "Submit Order";
+            this.SubmitOrderBtn.UseVisualStyleBackColor = false;
+            this.SubmitOrderBtn.Visible = false;
+            this.SubmitOrderBtn.Click += new System.EventHandler(this.SubmitOrderBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1151, 711);
+            this.Controls.Add(this.SubmitOrderBtn);
             this.Controls.Add(this.ViewOrdersDataGridView);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AddProductToOrderBtn);
@@ -751,6 +765,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.Button SubmitOrderBtn;
     }
 }
 

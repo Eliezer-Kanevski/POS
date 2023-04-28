@@ -429,6 +429,7 @@ namespace WindowsFormsApp1
                         AddProductIdToOrderTxtBx.Text = "";
                         AddProductQuantityToOrderTxtBx.Text = "";
                         AddCustomerAddBtn.Visible = false;
+                        SubmitOrderBtn.Visible = true;
                         return;
                     }
                 }
@@ -457,6 +458,11 @@ namespace WindowsFormsApp1
             ViewOrdersDataGridView.Visible = true;
             ViewCustomersDataGridView.Visible = false;
             ViewProductsDataGridView.Visible = false;
+        }
+
+        private void SubmitOrderBtn_Click(object sender, EventArgs e)
+        {
+            //submit order code.
         }
     }
 }
