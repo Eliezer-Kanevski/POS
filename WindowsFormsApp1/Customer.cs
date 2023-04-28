@@ -11,7 +11,11 @@ namespace WindowsFormsApp1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Windows.Forms;
+
     public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,5 +32,37 @@ namespace WindowsFormsApp1
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+
+        public static bool addCustomer(string name, string  email, string phone, string address)
+        {
+            try
+            {
+                using (var db = new POSDBEntities())
+                {
+                    int maxCustomerId = db.Customers.Any() ? db.Customers.Max(c => c.CustomerID) : 0;
+                    int customerID = maxCustomerId + 1;
+                    MessageBox.Show("generated ID = " + customerID);
+                    var newProduct = new Customer()
+                    {
+                        CustomerID = customerID,
+                        Name = name,
+                        Email = email,
+                        Phone = phone,
+                        Address = address
+                    };
+
+                    db.Customers.Add(newProduct);
+                    db.SaveChanges();
+
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.InnerException.Message);
+                return false;
+            }
+        }
     }
 }

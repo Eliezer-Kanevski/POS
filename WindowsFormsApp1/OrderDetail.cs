@@ -11,7 +11,10 @@ namespace WindowsFormsApp1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Windows.Forms;
+
     public partial class OrderDetail
     {
         public int OrderDetailID { get; set; }
@@ -21,5 +24,43 @@ namespace WindowsFormsApp1
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
+
+
+        public static bool validateOrderProduct(int productId, int quantity)
+        {
+            try
+            {
+                
+                using (var db = new POSDBDataSet())
+                {
+                    var availableQuantity = db.Products
+                        .Where(p => p.ProductID == productId)
+                        .Select(p => p.Quantity)
+                        .SingleOrDefault();
+
+                    if (availableQuantity == null)
+                    {
+                        MessageBox.Show("Product not found");
+                        return false;
+                    }
+
+                    bool valid = availableQuantity >= quantity;
+                    MessageBox.Show("available quantity = " + availableQuantity.ToString() + " quantity = " + quantity.ToString());
+                    MessageBox.Show("is quantity valid? " + valid);
+                    return availableQuantity >= quantity;
+                }
+                
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error" + ex.Message);
+                return false;
+            }
+            
+        }
     }
+
+    public static bool AddProductToOrder()
 }

@@ -11,7 +11,9 @@ namespace WindowsFormsApp1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using System.Windows.Forms;
+
     public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,5 +33,35 @@ namespace WindowsFormsApp1
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
+
+        public static bool createOrder(int customerId)
+        {
+            try
+            {
+                using (var db = new POSDBEntities())
+                {
+                    int maxOrderId = db.Orders.Any() ? db.Orders.Max(o => o.OrderID) : 0;
+                    int orderID = maxOrderId + 1;
+                    var  newOrder = new Order()
+                    {
+                        OrderID = orderID,
+                        CustomerID = customerId,
+                        OrderDate = DateTime.Now,
+                        Status = "New"
+                    };
+
+                    db.Orders.Add(newOrder);
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Failed to create new order");
+                return false;
+            }
+        }
+      
     }
 }

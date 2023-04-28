@@ -89,6 +89,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PosDb.edmx</DependentUpon>
     </Compile>
+    <Compile Include="POSDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="POSDBDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSDBDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>PosDb.tt</DependentUpon>
     </Compile>
@@ -113,6 +123,28 @@
     <None Include="packages.config" />
     <None Include="PosDb.edmx.diagram">
       <DependentUpon>PosDb.edmx</DependentUpon>
+    </None>
+    <None Include="POSDBDataSet.xsc">
+      <DependentUpon>POSDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="POSDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>POSDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="POSDBDataSet.xss">
+      <DependentUpon>POSDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="POSDBDataSet1.xsc">
+      <DependentUpon>POSDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="POSDBDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>POSDBDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="POSDBDataSet1.xss">
+      <DependentUpon>POSDBDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

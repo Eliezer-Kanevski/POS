@@ -12,6 +12,8 @@ namespace WindowsFormsApp1
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
+    using System.Linq.Expressions;
     using System.Windows.Forms;
 
     public partial class Product
@@ -35,26 +37,32 @@ namespace WindowsFormsApp1
             try {
                 using (var db = new POSDBEntities())
                 {
+                    int maxProductId = db.Products.Any() ? db.Products.Max(p => p.ProductID) : 0;
+                    int productID = maxProductId + 1;
+                    MessageBox.Show("generated ID = " + productID);
                     var newProduct = new Product()
                     {
+                        ProductID = productID,
                         Name = name,
                         Price = price,
                         Quantity = quantity
                     };
 
-
                     db.Products.Add(newProduct);
                     db.SaveChanges();
-                    int newProductId = newProduct.ProductID;
 
                     return true;
                 }
+
             }
-            catch {
+            catch (Exception ex){
+                MessageBox.Show(ex.InnerException.InnerException.Message);
                 return false;
             }
             
 
         }
+
+       
     }
 }
